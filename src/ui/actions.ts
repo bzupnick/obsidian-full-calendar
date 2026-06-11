@@ -1,6 +1,17 @@
 import { MarkdownView, TFile, Vault, Workspace } from "obsidian";
 import EventCache from "src/core/EventCache";
 
+export function openMeetingLinkForEvent(cache: EventCache, id: string) {
+    const event = cache.getEventById(id);
+    if (!event) {
+        throw new Error("Event not found.");
+    }
+    if (event.type !== "single" || !event.meetingLink) {
+        throw new Error("Event has no meeting link.");
+    }
+    window.open(event.meetingLink, "_blank");
+}
+
 /**
  * Open a file in the editor to a given event.
  * @param cache

@@ -10,7 +10,7 @@ import {
     toEventInput,
 } from "./interop";
 import { renderOnboarding } from "./onboard";
-import { openFileForEvent } from "./actions";
+import { openFileForEvent, openMeetingLinkForEvent } from "./actions";
 import { launchCreateModal, launchEditModal } from "./event_modal";
 import { isTask, toggleTask, unmakeTask } from "src/ui/tasks";
 import { UpdateViewCallback } from "src/core/EventCache";
@@ -232,6 +232,16 @@ export class CalendarView extends ItemView {
                                     );
                                 })
                         );
+                        if (event?.type === "single" && event.meetingLink) {
+                            menu.addItem((item) =>
+                                item.setTitle("Go To Meeting").onClick(() => {
+                                    openMeetingLinkForEvent(
+                                        this.plugin.cache,
+                                        e.id
+                                    );
+                                })
+                            );
+                        }
                     } else {
                         menu.addItem((item) =>
                             item
