@@ -135,6 +135,10 @@ export const EditEvent = ({
             []
     );
 
+    const [meetingLink, setMeetingLink] = useState(
+        initialEvent?.type === "single" ? initialEvent.meetingLink || "" : ""
+    );
+
     const [allDay, setAllDay] = useState(initialEvent?.allDay || false);
 
     const [calendarIndex, setCalendarIndex] = useState(defaultCalendarIndex);
@@ -188,6 +192,7 @@ export const EditEvent = ({
                           date: date || "",
                           endDate: endDate || null,
                           completed: isTask ? complete : null,
+                          meetingLink: meetingLink,
                       }),
             },
             calendarIndex
@@ -365,6 +370,22 @@ export const EditEvent = ({
                             type="checkbox"
                         />
                     </>
+                )}
+
+                {!isRecurring && (
+                    <p>
+                        <label htmlFor="meetingLink">Meeting Link </label>
+                        <input
+                            type="url"
+                            id="meetingLink"
+                            value={meetingLink}
+                            placeholder="https://"
+                            onChange={makeChangeListener(
+                                setMeetingLink,
+                                (x) => x
+                            )}
+                        />
+                    </p>
                 )}
 
                 <p

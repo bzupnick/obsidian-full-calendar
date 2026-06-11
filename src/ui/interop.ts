@@ -213,6 +213,7 @@ export function toEventInput(
                         frontmatter.completed !== undefined &&
                         frontmatter.completed !== null,
                     taskCompleted: frontmatter.completed,
+                    meetingLink: frontmatter.meetingLink,
                 },
             };
         } else {
@@ -225,6 +226,7 @@ export function toEventInput(
                         frontmatter.completed !== undefined &&
                         frontmatter.completed !== null,
                     taskCompleted: frontmatter.completed,
+                    meetingLink: frontmatter.meetingLink,
                 },
             };
         }
@@ -265,6 +267,7 @@ export function fromEventApi(event: EventApi): OFCEvent {
                   date: startDate,
                   ...(startDate !== endDate ? { endDate } : { endDate: null }),
                   completed: event.extendedProps.taskCompleted,
+                  meetingLink: event.extendedProps.meetingLink,
               }),
     };
 }

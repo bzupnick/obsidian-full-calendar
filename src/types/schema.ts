@@ -67,6 +67,7 @@ export const EventSchema = z.discriminatedUnion("type", [
     z.object({
         type: z.literal("single"),
         date: ParsedDate,
+        meetingLink: z.string().nullable().optional(),
         endDate: ParsedDate.nullable().default(null),
         completed: ParsedDate.or(z.literal(false))
             .or(z.literal(null))
